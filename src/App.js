@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./components/Header";
+import Heading from "./components/Heading";
+import MyButton from "./components/MyButton";
+import MyList from "./components/MyList";
+import Footer from "./components/Footer";
+import { ListContext } from "./ListContext";
+import AddList from "./components/AddList";
+import "./App.css";
 
-function App() {
+export default function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ListContext.Consumer>
+      {({ currentView,updateView }) => (
+        <div class="container">
+          <Header />
+          {currentView === "home" ? (
+            <>
+              <Heading />
+              <MyButton text="Add List" click={()=>updateView('addList')}/>
+              <MyList />
+
+            </>
+          ) : <AddList/>}
+          <Footer />
+        </div>
+      )}
+    </ListContext.Consumer>
   );
 }
-
-export default App;

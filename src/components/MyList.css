@@ -1,0 +1,20 @@
+#list::-webkit-scrollbar {
+  display: none;
+}
+.list--item {
+  margin: 0 10px 0 0;
+  padding: 30px 0px 30px 25px;
+  border-radius: 5px;
+  color: white;
+  width: 130px;
+  height: 150px;
+  font-size: 14px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+hr {
+  height: 1.1px;
+  background: #cacaca;
+  border-width: 0;
+}

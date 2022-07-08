@@ -1,0 +1,32 @@
+import React from "react";
+import { CalendarMonthRounded, HomeRounded } from "@mui/icons-material";
+import { ListContext } from "../ListContext";
+import "./Footer.css";
+
+export default function Footer() {
+  const defaultColor = "#8a8a8a";
+  return (
+    <ListContext.Consumer>
+      {({ currentView, updateView }) => (
+        <footer>
+          <div class="footer--icon" onClick={() => updateView("home")}>
+            <HomeRounded
+              sx={{
+                color: `${currentView === "home" ? "#0C064D" : defaultColor}`,
+              }}
+            />
+          </div>
+          <div class="footer--icon">
+            <CalendarMonthRounded
+              sx={{
+                color: `${
+                  currentView === "calendar" ? "#0C064D" : defaultColor
+                }`,
+              }}
+            />
+          </div>
+        </footer>
+      )}
+    </ListContext.Consumer>
+  );
+}

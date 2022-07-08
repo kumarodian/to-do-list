@@ -1,0 +1,18 @@
+#addList input{
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 10px 0;
+    font-size: 22px;
+}
+#addList input:focus{
+    outline: none;
+}
+#title--edit{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#title--edit svg{
+    font-size: 20px;
+    color: #7a7a7a;
+}

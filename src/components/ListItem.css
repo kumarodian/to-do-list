@@ -1,0 +1,17 @@
+.items {
+  color: #ffffff;
+  position: relative;
+  margin: 0 0 10px 0;
+  font-size: 12px;
+}
+.items hr {
+  position: relative;
+  top: 17px;
+  background: #bfbfbf;
+  width: inherit;
+  margin-left: 0;
+  margin-right: 5px;
+}
+.done input:disabled {
+  visibility: hidden;
+}
