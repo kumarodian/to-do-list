@@ -9,14 +9,14 @@ export default function Footer() {
     <ListContext.Consumer>
       {({ currentView, updateView }) => (
         <footer>
-          <div class="footer--icon" onClick={() => updateView("home")}>
+          <div className="footer--icon" onClick={() => updateView("home")}>
             <HomeRounded
               sx={{
                 color: `${currentView === "home" ? "#0C064D" : defaultColor}`,
               }}
             />
           </div>
-          <div class="footer--icon">
+          <div className="footer--icon">
             <CalendarMonthRounded
               sx={{
                 color: `${

@@ -1,18 +1,40 @@
-#addList input{
-    border: none;
-    border-bottom: 1px solid gray;
-    padding: 10px 0;
-    font-size: 22px;
+#addList {
+  position: relative;
+  height: 80%;
 }
-#addList input:focus{
-    outline: none;
+#addList input {
+  border: none;
+  padding: 10px 0;
+  font-size: 22px;
 }
-#title--edit{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+#addList input:focus {
+  border-bottom: 1px solid gray;
 }
-#title--edit svg{
-    font-size: 20px;
-    color: #7a7a7a;
+#addList input:focus {
+  outline: none;
+}
+#sub--item input {
+  font-size: 16px;
+  margin: 10px 0 0 0;
+  padding: 5px 0 2px 0;
+  width: 100%;
+}
+#sub--item > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#sub--item svg {
+  font-size: 17px;
+  color: #858585;
+  cursor: pointer;
+}
+#title--edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#title--edit svg {
+  font-size: 20px;
+  color: #7a7a7a;
 }

@@ -25,37 +25,41 @@ function customScrollFunction(event) {
 }
 
 export default function MyList() {
+  const { list, updateList } = React.useContext(ListContext);
   return (
-    <ListContext.Consumer>
-      {({ list, updateList }) => (
-        <div
-          id="list"
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            overflowX: "scroll",
-            justifyContent: list.length === 1 ? "center" : "flex-start",
-            marginTop: "30px",
-          }}
-        >
-          {list.map((obj) => {
-            return (
-              <div
-                class="list--item"
-                style={{ background: obj.bg || "#F4F4F6" }}
-              >
-                <div>{obj.title}</div>
-                <hr />
-                {obj.item.map((list, index) => {
-                  if (index < 4)
-                    return <ListItem text={list.title} status={list.status} />;
-                  return true;
-                })}
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </ListContext.Consumer>
+    <div
+      id="list"
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        overflowX: "scroll",
+        justifyContent: list.length === 1 ? "center" : "flex-start",
+        marginTop: "30px",
+      }}
+    >
+      {list.map((obj, index) => {
+        return (
+          <div
+            className="list--item"
+            style={{ background: obj.bgColor, color: obj.textColor }}
+            key={index}
+          >
+            <div>{obj.title}</div>
+            <hr style={{ background: obj.textColor }} />
+            {obj.item.map((list, index) => {
+              if (index < 4)
+                return (
+                  <ListItem
+                    text={list.title}
+                    status={list.status}
+                    key={index}
+                  />
+                );
+              return true;
+            })}
+          </div>
+        );
+      })}
+    </div>
   );
 }
