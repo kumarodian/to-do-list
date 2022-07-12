@@ -39,7 +39,12 @@ export default function AddList(props) {
     setList(copyItem);
   }
   function removeItem(itemId) {
-    const copyItem = list.filter((item) => itemId !== item.id);
+    const copyItem = list.map((obj) => {
+      if (obj.id === props.id) {
+        const newItemAdd = obj.item.filter((item) => item.id !== itemId);
+        return { ...obj, item: newItemAdd };
+      } else return obj;
+    });
     setList(copyItem);
   }
   const items = list.map((obj) =>

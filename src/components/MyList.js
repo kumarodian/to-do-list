@@ -25,7 +25,11 @@ function customScrollFunction(event) {
 }
 
 export default function MyList() {
-  const { list, updateList } = React.useContext(ListContext);
+  const { list, updateView, setCurrentListId } = React.useContext(ListContext);
+  function viewList(listId) {
+    updateView("viewList");
+    setCurrentListId(listId);
+  }
   return (
     <div
       id="list"
@@ -40,6 +44,7 @@ export default function MyList() {
       {list.map((obj, index) => {
         return (
           <div
+            onClick={() => viewList(obj.id)}
             className="list--item"
             style={{ background: obj.bgColor, color: obj.textColor }}
             key={index}
@@ -53,6 +58,7 @@ export default function MyList() {
                     text={list.title}
                     status={list.status}
                     key={index}
+                    textColor={obj.textColor}
                   />
                 );
               return true;

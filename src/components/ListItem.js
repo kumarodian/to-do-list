@@ -1,9 +1,8 @@
 import React from "react";
 import "./ListItem.css";
 
-export default function ListItem({ text, status, date }) {
+export default function ListItem({ text, status, date, textColor }) {
   const doneStyle = {
-    color: "#bfbfbf",
     display: "inherit",
   };
   const notDoneStyle = {
@@ -15,7 +14,7 @@ export default function ListItem({ text, status, date }) {
         className={`items${status === "done" ? " done" : " notDone"}`}
         style={status === "done" ? { ...doneStyle } : { ...notDoneStyle }}
       >
-        {status === "done" ? <hr /> : null}
+        {status === "done" ? <hr style={{ background: textColor }} /> : null}
         <input style={{ margin: "0 6px 0 0" }} type="checkbox" disabled />
         {text.length > 10 ? `${text.slice(0, 13)} ...` : text}
       </div>

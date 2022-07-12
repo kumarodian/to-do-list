@@ -8,13 +8,21 @@ export function getCurrentDate() {
 
 export function getRandomTheme() {
   const list = [
-    { background: "#b200b3", text: "#FFFFFF" },
-    { background: "#b3006b", text: "#FFFFFF" },
-    { background: "#001f99", text: "#FFFFFF" },
-    { background: "#ffd6b2", text: "#000" },
-    { background: "#ccffb2", text: "#000" },
-    { background: "#b2e0ff", text: "#000" },
-    { background: "#ffb2ff", text: "#000" },
+    { background: "#3A2C85", text: "#FFFFFF" },
+    { background: "#DF3435", text: "#FFFFFF" },
+    { background: "#99907D", text: "#FFFFFF" },
+    { background: "#B5BA72", text: "#000" },
+    { background: "#47A8BD", text: "#ffffff" },
+    { background: "#87BFFF", text: "#000" },
+    { background: "#E07BE0", text: "#000" },
+    { background: "#F7B32B", text: "#000" },
+    { background: "#A9E5BB", text: "#000" },
+    { background: "#49D49D", text: "#000" },
+    { background: "#AB92BF", text: "#ffffff" },
+    { background: "#214E34", text: "#ffffff" },
+    { background: "#508AA8", text: "#ffffff" },
+    { background: "#1789FC", text: "#ffffff" },
+    { background: "#48E5C2", text: "#000" },
   ];
   return list[Math.floor(Math.random() * list.length)];
 }

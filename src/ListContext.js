@@ -3,6 +3,7 @@ import React, { useState, createContext } from "react";
 const ListContext = createContext();
 export default function CustomListContext(props) {
   const [currentView, setCurrentView] = useState("home");
+  const [currentListId, setCurrentListId] = useState(null);
   const [list, setList] = useState(
     JSON.parse(localStorage.getItem("list")) || []
   );
@@ -15,7 +16,16 @@ export default function CustomListContext(props) {
   }
 
   return (
-    <ListContext.Provider value={{ list, currentView, updateView, setList }}>
+    <ListContext.Provider
+      value={{
+        list,
+        currentView,
+        updateView,
+        setList,
+        currentListId,
+        setCurrentListId,
+      }}
+    >
       {props.children}
     </ListContext.Provider>
   );

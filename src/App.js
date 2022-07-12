@@ -6,6 +6,7 @@ import MyList from "./components/MyList";
 import Footer from "./components/Footer";
 import { ListContext } from "./ListContext";
 import AddList from "./components/AddList";
+import ViewList from "./components/ViewList";
 import { v4 as uuidv4 } from "uuid";
 import { getCurrentDate, getRandomTheme } from "./utils";
 import "./App.css";
@@ -26,6 +27,20 @@ let listID = null;
 export default function App(props) {
   const { currentView, updateView, list, setList } =
     React.useContext(ListContext);
+  var view;
+  if (currentView === "home") {
+    view = (
+      <>
+        <Heading />
+        <MyButton text="Add List" click={addList} />
+        <MyList />
+      </>
+    );
+  } else if (currentView === "viewList") {
+    view = <ViewList />;
+  } else {
+    view = <AddList id={listID} />;
+  }
 
   function addList() {
     setList([getNewList(), ...list]);
@@ -34,15 +49,7 @@ export default function App(props) {
   return (
     <div className="container">
       <Header />
-      {currentView === "home" ? (
-        <>
-          <Heading />
-          <MyButton text="Add List" click={addList} />
-          <MyList />
-        </>
-      ) : (
-        <AddList id={listID} />
-      )}
+      {view}
       <Footer />
     </div>
   );
