@@ -6,3 +6,32 @@
   min-width: 290px;
   position: relative;
 }
+#viewlist {
+  margin-bottom: 20px;
+}
+#viewlist--title {
+  font-size: 30px;
+  font-weight: 600;
+}
+#viewlist--taskCount {
+  font-size: 12px;
+  color: #8c8c8c;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #b8b8b8;
+}
+.viewlist--item {
+  padding: 7px 15px 0 0;
+  cursor: pointer;
+  width: max-content;
+  position: relative;
+}
+.viewlist--item--completed {
+  color: #df3435;
+}
+.viewlist--item--completed hr {
+  top: 15px;
+  position: relative;
+  background: #df3435;
+  height: 2px;
+  margin: 0;
+}
