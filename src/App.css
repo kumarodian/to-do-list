@@ -12,6 +12,14 @@
 #viewlist--title {
   font-size: 30px;
   font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#list--delete svg {
+  font-size: 20px;
+  color: #8a8a8a;
+  cursor: pointer;
 }
 #viewlist--taskCount {
   font-size: 12px;
@@ -34,4 +42,36 @@
   background: #df3435;
   height: 2px;
   margin: 0;
+}
+.popup-content {
+  width: 291px;
+  padding-bottom: 20px;
+}
+.modal-box-button {
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  align-items: center;
+}
+.modal-box {
+  text-align: center;
+}
+.modal-box p {
+  margin-bottom: 30px;
+}
+.modal-box span {
+  font-weight: 600;
+}
+.modal-button {
+  background: #ffffff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid #000000;
+  outline: none;
+}
+.modal-confirmDelete {
+  background: #ffcaca;
+  color: #850000;
+  border: 1px solid #850000;
 }

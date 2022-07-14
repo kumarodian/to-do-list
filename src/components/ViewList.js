@@ -1,9 +1,12 @@
 import React from "react";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+import { Delete, TaskAlt } from "@mui/icons-material";
 import { ListContext } from "../ListContext";
 export default function ViewList(props) {
-  const { list, currentListId, setList } = React.useContext(ListContext);
+  const { list, currentListId, setList, updateView } =
+    React.useContext(ListContext);
   function changeItemStatus(itemId) {
-    console.log(itemId);
     const copyItem = list.map((obj) => {
       if (obj.id === currentListId) {
         const newItemAdd = obj.item.map((item) =>
@@ -42,10 +45,39 @@ export default function ViewList(props) {
     }
     return true;
   });
+  function deleteList() {
+    const copyItem = list.filter((obj) => obj.id !== currentListId);
+    setList(copyItem);
+    updateView("home");
+  }
   return (
     <div>
       <div id="viewlist">
-        <div id="viewlist--title">{title}</div>
+        <div id="viewlist--title">
+          <span>{title}</span>
+          <div title={`Delete ${title}`} id="list--delete">
+            <Popup trigger={<Delete />} modal>
+              {(close) => (
+                <div className="modal-box">
+                  <p>
+                    Delete <span>{title}</span>
+                  </p>
+                  <div className="modal-box-button">
+                    <button className="modal-button" onClick={close}>
+                      Cancel
+                    </button>
+                    <button
+                      className="modal-button modal-confirmDelete"
+                      onClick={deleteList}
+                    >
+                      Confirm
+                    </button>
+                  </div>
+                </div>
+              )}
+            </Popup>
+          </div>
+        </div>
         <div id="viewlist--taskCount">
           {totalItem && `${itemCompeleted} of ${totalItem} tasks`}
         </div>

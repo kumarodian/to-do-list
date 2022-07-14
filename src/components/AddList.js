@@ -56,7 +56,7 @@ export default function AddList(props) {
               placeholder="Enter task"
               value={title}
               onChange={(event) => updateItem(id, event.target.value)}
-              onKeyPress={(event) => (event.charCode === 13 ? addItem() : null)}
+              onKeyPress={(event) => (event.key === "Enter" ? addItem() : null)}
             />
             <div
               onClick={() => {
@@ -69,6 +69,7 @@ export default function AddList(props) {
         ))
       : null
   );
+
   return (
     <div id="addList">
       <div id="title--edit">
