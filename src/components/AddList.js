@@ -1,14 +1,19 @@
 import React, { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Edit, Clear } from "@mui/icons-material";
+import { Edit, Clear, CheckCircle } from "@mui/icons-material";
 import MyButton from "./MyButton";
 import { ListContext } from "../ListContext";
 import "./AddList.css";
-
+const DELAY = 2000;
 export default function AddList(props) {
   const { list, setList } = useContext(ListContext);
+  const [autoSaved, setAutoSaved] = React.useState(false);
   const [title, setTitle] = React.useState("My Task");
   const textInput = React.useRef(null);
+  const handleSaveIcon = setTimeout(() => {
+    setAutoSaved(false);
+  }, 3000);
+
   function addItem() {
     const newItem = {
       id: uuidv4(),
@@ -21,6 +26,7 @@ export default function AddList(props) {
     setList(copyList);
   }
   function updateTitle(titleId, title) {
+    setAutoSaved(true);
     const copyItem = list.map((obj) =>
       obj.id === titleId ? { ...obj, title: title } : obj
     );
@@ -28,6 +34,7 @@ export default function AddList(props) {
     setList(copyItem);
   }
   function updateItem(itemId, title) {
+    setAutoSaved(true);
     const copyItem = list.map((obj) => {
       if (obj.id === props.id) {
         const newItemAdd = obj.item.map((item) =>
@@ -47,6 +54,11 @@ export default function AddList(props) {
     });
     setList(copyItem);
   }
+  React.useEffect(() => {
+    setTimeout(() => {
+      setAutoSaved(false);
+    }, DELAY);
+  }, []);
   const items = list.map((obj) =>
     obj.id === props.id
       ? obj.item.map(({ id, title }) => (
@@ -81,10 +93,16 @@ export default function AddList(props) {
         <Edit />
       </div>
       <div id="sub--item">{items}</div>
+      {autoSaved && (
+        <div id="autosaveIcon">
+          <CheckCircle />
+          <span>Auto saved</span>
+        </div>
+      )}
       <MyButton
         bgColor={"#b4b9ff"}
         textColor={"#000"}
-        parentStyle={{ position: "absolute", bottom: "10px", right: "-15px" }}
+        parentStyle={{ position: "absolute", bottom: "75px", right: "10px" }}
         click={addItem}
       />
     </div>

@@ -12,9 +12,29 @@ export default function CustomListContext(props) {
     [list]
   );
   function updateView(view) {
+    //clean empty items
+    console.log("1");
+    console.log(currentListId);
+    if (currentListId != null) {
+      const copyList = list.map((obj) => {
+        if (obj.id === currentListId) {
+          const newItemAdd = obj.item.filter(
+            (item) => item.title.trim().length > 0
+          );
+          return { ...obj, item: newItemAdd };
+        } else return obj;
+      });
+      setList(copyList);
+    }
     setCurrentView(view);
   }
-
+  function deleteList() {
+    console.log("de");
+    const copyList = list.filter((obj) => obj.id !== currentListId);
+    setList(copyList);
+    setCurrentListId(null);
+    setCurrentView("home");
+  }
   return (
     <ListContext.Provider
       value={{
@@ -24,6 +44,7 @@ export default function CustomListContext(props) {
         setList,
         currentListId,
         setCurrentListId,
+        deleteList,
       }}
     >
       {props.children}

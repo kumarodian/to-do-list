@@ -1,11 +1,20 @@
 import React from "react";
 import Popup from "reactjs-popup";
+import { v4 as uuidv4 } from "uuid";
 import "reactjs-popup/dist/index.css";
-import { Delete, TaskAlt } from "@mui/icons-material";
+import { Delete, TaskAlt, Clear } from "@mui/icons-material";
 import { ListContext } from "../ListContext";
+import MyButton from "./MyButton";
 export default function ViewList(props) {
-  const { list, currentListId, setList, updateView } =
-    React.useContext(ListContext);
+  const {
+    list,
+    currentListId,
+    setList,
+    updateView,
+    setCurrentListId,
+    deleteList,
+  } = React.useContext(ListContext);
+  const [newList, setNewList] = React.useState([]);
   function changeItemStatus(itemId) {
     const copyItem = list.map((obj) => {
       if (obj.id === currentListId) {
@@ -14,6 +23,15 @@ export default function ViewList(props) {
             ? { ...item, status: item.status === "done" ? "" : "done" }
             : item
         );
+        return { ...obj, item: newItemAdd };
+      } else return obj;
+    });
+    setList(copyItem);
+  }
+  function removeItem(itemId) {
+    const copyItem = list.map((obj) => {
+      if (obj.id === currentListId) {
+        const newItemAdd = obj.item.filter((item) => item.id !== itemId);
         return { ...obj, item: newItemAdd };
       } else return obj;
     });
@@ -28,28 +46,66 @@ export default function ViewList(props) {
       title = obj.title;
       totalItem = obj.item.length;
       listDisplay = obj.item.map(({ id, title, status }) => {
-        if (status === "done") itemCompeleted++;
+        if (status === "done" && title.trim().length) itemCompeleted++;
         return (
           <div
             className={`viewlist--item${
               status === "done" ? " viewlist--item--completed" : ""
             }`}
             key={id}
-            onClick={() => changeItemStatus(id)}
           >
-            {status === "done" && <hr />}
-            {title}
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <input
+                type="checkbox"
+                checked={status === "done" ? "checked" : ""}
+                style={{ margin: "0px 6px 0px 0px" }}
+                onChange={() => changeItemStatus(id)}
+              />
+              <span className={`${status === "done" ? "lineThrough" : ""}`}>
+                <input
+                  value={title}
+                  placeholder="Type here ..."
+                  onChange={(event) => updateItem(id, event.target.value)}
+                />
+              </span>
+            </div>
+            <div
+              onClick={() => {
+                removeItem(id);
+              }}
+            >
+              <Clear />
+            </div>
           </div>
         );
       });
     }
     return true;
   });
-  function deleteList() {
-    const copyItem = list.filter((obj) => obj.id !== currentListId);
+
+  function updateItem(id, title) {
+    const copyItem = list.map((obj) => {
+      if (obj.id === currentListId) {
+        const newItemAdd = obj.item.map((item) =>
+          item.id === id ? { ...item, title } : item
+        );
+        return { ...obj, item: newItemAdd };
+      } else return obj;
+    });
     setList(copyItem);
-    updateView("home");
   }
+  function addItem() {
+    const newItem = {
+      id: uuidv4(),
+      title: "",
+      status: "",
+    };
+    const copyList = list.map((obj) =>
+      obj.id === currentListId ? { ...obj, item: [...obj.item, newItem] } : obj
+    );
+    setList(copyList);
+  }
+
   return (
     <div>
       <div id="viewlist">
@@ -68,7 +124,7 @@ export default function ViewList(props) {
                     </button>
                     <button
                       className="modal-button modal-confirmDelete"
-                      onClick={deleteList}
+                      onClick={() => deleteList()}
                     >
                       Confirm
                     </button>
@@ -79,10 +135,22 @@ export default function ViewList(props) {
           </div>
         </div>
         <div id="viewlist--taskCount">
-          {totalItem && `${itemCompeleted} of ${totalItem} tasks`}
+          {totalItem > 0 && totalItem === itemCompeleted ? <TaskAlt /> : null}
+          {totalItem && (
+            <span>{`${itemCompeleted} of ${totalItem} tasks`}</span>
+          )}
         </div>
       </div>
       {listDisplay}
+      <div id="addList">
+        <div id="sub--item">{newList}</div>
+      </div>
+      <MyButton
+        bgColor={"#b4b9ff"}
+        textColor={"#000"}
+        parentStyle={{ position: "absolute", bottom: "75px", right: "10px" }}
+        click={addItem}
+      />
     </div>
   );
 }

@@ -5,28 +5,23 @@ import "./Footer.css";
 
 export default function Footer() {
   const defaultColor = "#8a8a8a";
+  const { currentView, updateView } = React.useContext(ListContext);
   return (
-    <ListContext.Consumer>
-      {({ currentView, updateView }) => (
-        <footer>
-          <div className="footer--icon" onClick={() => updateView("home")}>
-            <HomeRounded
-              sx={{
-                color: `${currentView === "home" ? "#0C064D" : defaultColor}`,
-              }}
-            />
-          </div>
-          <div className="footer--icon">
-            <CalendarMonthRounded
-              sx={{
-                color: `${
-                  currentView === "calendar" ? "#0C064D" : defaultColor
-                }`,
-              }}
-            />
-          </div>
-        </footer>
-      )}
-    </ListContext.Consumer>
+    <footer>
+      <div className="footer--icon" onClick={() => updateView("home")}>
+        <HomeRounded
+          sx={{
+            color: `${currentView === "home" ? "#0C064D" : defaultColor}`,
+          }}
+        />
+      </div>
+      <div className="footer--icon">
+        <CalendarMonthRounded
+          sx={{
+            color: `${currentView === "calendar" ? "#0C064D" : defaultColor}`,
+          }}
+        />
+      </div>
+    </footer>
   );
 }

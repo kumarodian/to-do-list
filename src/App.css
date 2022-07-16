@@ -26,26 +26,81 @@
   color: #8c8c8c;
   padding-bottom: 10px;
   border-bottom: 2px solid #b8b8b8;
+  display: flex;
+  align-items: center;
+}
+#viewlist--taskCount svg {
+  font-size: 16px;
+  color: green;
+  margin-right: 5px;
+}
+#autosaveIcon {
+  margin-top: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #286e07;
+  /* animation-name: fadeOut;
+  -webkit-animation-name: fadeOut; */
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+}
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+#autosaveIcon svg {
+  margin-right: 5px;
+  font-size: 16px;
 }
 .viewlist--item {
   padding: 7px 15px 0 0;
   cursor: pointer;
-  width: max-content;
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
-.viewlist--item--completed {
-  color: #df3435;
+.viewlist--item svg {
+  font-size: 17px;
+  color: #858585;
+  cursor: pointer;
+}
+.viewlist--item input {
+  border: none;
+}
+.viewlist--item input:focus {
+  outline: none;
+}
+.viewlist--item--completed input {
+  color: #0d6efd;
+  font-weight: bold;
 }
 .viewlist--item--completed hr {
-  top: 15px;
-  position: relative;
+  top: 20px;
+  position: absolute;
   background: #df3435;
-  height: 2px;
+  height: 1px;
   margin: 0;
+  width: 80%;
+  margin-left: 20px;
 }
 .popup-content {
-  width: 291px;
-  padding-bottom: 20px;
+  width: 291px !important;
+  padding-bottom: 20px !important;
 }
 .modal-box-button {
   display: flex;
@@ -74,4 +129,34 @@
   background: #ffcaca;
   color: #850000;
   border: 1px solid #850000;
+}
+#addList input {
+  border: none;
+  padding: 10px 0;
+  font-size: 22px;
+}
+#addList input:focus {
+  border-bottom: 1px solid gray;
+}
+#addList input:focus {
+  outline: none;
+}
+#sub--item input {
+  font-size: 16px;
+  margin: 10px 0 0 0;
+  padding: 5px 0 2px 0;
+  width: 100%;
+}
+#sub--item > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#sub--item svg {
+  font-size: 17px;
+  color: #858585;
+  cursor: pointer;
+}
+.lineThrough {
+  text-decoration: line-through;
 }

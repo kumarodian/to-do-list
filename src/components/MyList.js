@@ -53,14 +53,14 @@ export default function MyList() {
             <hr style={{ background: obj.textColor }} />
             {obj.item.map((list, index) => {
               if (index < 4)
-                return (
+                return list.title.trim().length ? (
                   <ListItem
                     text={list.title}
                     status={list.status}
                     key={index}
                     textColor={obj.textColor}
                   />
-                );
+                ) : null;
               return true;
             })}
           </div>

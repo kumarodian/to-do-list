@@ -22,7 +22,9 @@ export default function MyButton({
     fontSize: "14px",
   };
   return (
-    <div style={text ? { textAlign: "center" } : { ...parentStyle }}>
+    <div
+      style={text ? { textAlign: "center" } : { zIndex: "1", ...parentStyle }}
+    >
       <button style={styles} onClick={click}>
         +
       </button>
