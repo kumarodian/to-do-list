@@ -10,6 +10,7 @@ import ViewList from "./components/ViewList";
 import { v4 as uuidv4 } from "uuid";
 import { getCurrentDate, getRandomTheme } from "./utils";
 import "./App.css";
+let listID = null;
 function getNewList() {
   let THEME = getRandomTheme();
   listID = uuidv4();
@@ -23,11 +24,29 @@ function getNewList() {
   };
   return obj;
 }
-let listID = null;
+
 export default function App(props) {
-  const { currentView, updateView, list, setList } =
-    React.useContext(ListContext);
+  const {
+    currentView,
+    updateView,
+    list,
+    setList,
+    setCurrentListId,
+    currentListId,
+  } = React.useContext(ListContext);
   var view;
+
+  function addList() {
+    const tmp = [getNewList(), ...list];
+    console.log("before", tmp);
+    //console.log(getNewList());
+    setList((prev) => {
+      return [getNewList(), ...prev];
+    });
+    //console.log("after", list);
+    setCurrentListId(listID);
+    updateView(tmp, "viewList");
+  }
   if (currentView === "home") {
     view = (
       <>
@@ -41,11 +60,21 @@ export default function App(props) {
   } else {
     view = <AddList id={listID} />;
   }
-
-  function addList() {
-    setList([getNewList(), ...list]);
-    updateView("addList");
-  }
+  React.useEffect(() => {
+    console.log("App effect");
+    if (currentListId != null) {
+      const copyList = list.map((obj) => {
+        if (obj.id === currentListId) {
+          const newItemAdd = obj.item.filter(
+            (item) => item.title.trim().length > 0
+          );
+          return { ...obj, item: newItemAdd };
+        } else return obj;
+      });
+      console.log("copylist", copyList);
+      setList(copyList);
+    }
+  }, [list.length]);
   return (
     <div className="container">
       <Header />

@@ -5,10 +5,10 @@ import "./Footer.css";
 
 export default function Footer() {
   const defaultColor = "#8a8a8a";
-  const { currentView, updateView } = React.useContext(ListContext);
+  const { currentView, updateView, list } = React.useContext(ListContext);
   return (
     <footer>
-      <div className="footer--icon" onClick={() => updateView("home")}>
+      <div className="footer--icon" onClick={() => updateView(list, "home")}>
         <HomeRounded
           sx={{
             color: `${currentView === "home" ? "#0C064D" : defaultColor}`,

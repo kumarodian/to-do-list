@@ -14,7 +14,8 @@ export default function ViewList(props) {
     setCurrentListId,
     deleteList,
   } = React.useContext(ListContext);
-  const [newList, setNewList] = React.useState([]);
+
+  const [newList, setNewList] = React.useState(list);
   function changeItemStatus(itemId) {
     const copyItem = list.map((obj) => {
       if (obj.id === currentListId) {
@@ -105,12 +106,22 @@ export default function ViewList(props) {
     );
     setList(copyList);
   }
-
+  function updateTitle(titleId, title) {
+    const copyItem = list.map((obj) =>
+      obj.id === titleId ? { ...obj, title: title } : obj
+    );
+    setList(copyItem);
+  }
+  console.log(list);
   return (
     <div>
       <div id="viewlist">
         <div id="viewlist--title">
-          <span>{title}</span>
+          <input
+            id="viewlist--title-input"
+            value={title}
+            onChange={(event) => updateTitle(currentListId, event.target.value)}
+          />
           <div title={`Delete ${title}`} id="list--delete">
             <Popup trigger={<Delete />} modal>
               {(close) => (
@@ -141,10 +152,10 @@ export default function ViewList(props) {
           )}
         </div>
       </div>
-      {listDisplay}
-      <div id="addList">
+      <div id="viewListItem-container">{listDisplay}</div>
+      {/* <div id="addList">
         <div id="sub--item">{newList}</div>
-      </div>
+      </div> */}
       <MyButton
         bgColor={"#b4b9ff"}
         textColor={"#000"}

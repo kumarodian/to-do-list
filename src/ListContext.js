@@ -11,11 +11,10 @@ export default function CustomListContext(props) {
     () => localStorage.setItem("list", JSON.stringify(list)),
     [list]
   );
-  function updateView(view) {
+  function updateView(list = [], view) {
+    console.log("curr", currentListId);
     //clean empty items
-    console.log("1");
-    console.log(currentListId);
-    if (currentListId != null) {
+    /* if (currentListId != null) {
       const copyList = list.map((obj) => {
         if (obj.id === currentListId) {
           const newItemAdd = obj.item.filter(
@@ -24,12 +23,12 @@ export default function CustomListContext(props) {
           return { ...obj, item: newItemAdd };
         } else return obj;
       });
+      console.log("copylist", copyList);
       setList(copyList);
-    }
+    } */
     setCurrentView(view);
   }
   function deleteList() {
-    console.log("de");
     const copyList = list.filter((obj) => obj.id !== currentListId);
     setList(copyList);
     setCurrentListId(null);
@@ -45,6 +44,7 @@ export default function CustomListContext(props) {
         currentListId,
         setCurrentListId,
         deleteList,
+        setCurrentView,
       }}
     >
       {props.children}

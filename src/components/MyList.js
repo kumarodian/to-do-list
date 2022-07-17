@@ -27,9 +27,10 @@ function customScrollFunction(event) {
 export default function MyList() {
   const { list, updateView, setCurrentListId } = React.useContext(ListContext);
   function viewList(listId) {
-    updateView("viewList");
+    updateView(list, "viewList");
     setCurrentListId(listId);
   }
+  console.log("Mylist", list);
   return (
     <div
       id="list"
@@ -49,7 +50,7 @@ export default function MyList() {
             style={{ background: obj.bgColor, color: obj.textColor }}
             key={index}
           >
-            <div>{obj.title}</div>
+            <div style={{ paddingRight: "10px" }}>{obj.title}</div>
             <hr style={{ background: obj.textColor }} />
             {obj.item.map((list, index) => {
               if (index < 4)

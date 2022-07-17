@@ -16,6 +16,25 @@
   justify-content: space-between;
   align-items: center;
 }
+#viewlist--title-input {
+  width: 252px;
+  border: none;
+  font-size: 30px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+#viewListItem-container {
+  overflow-y: scroll;
+  height: 350px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+#viewListItem-container::-webkit-scrollbar {
+  display: none;
+}
+#viewlist--title-input:focus {
+  outline: none;
+}
 #list--delete svg {
   font-size: 20px;
   color: #8a8a8a;
