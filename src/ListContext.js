@@ -11,21 +11,7 @@ export default function CustomListContext(props) {
     () => localStorage.setItem("list", JSON.stringify(list)),
     [list]
   );
-  function updateView(list = [], view) {
-    console.log("curr", currentListId);
-    //clean empty items
-    /* if (currentListId != null) {
-      const copyList = list.map((obj) => {
-        if (obj.id === currentListId) {
-          const newItemAdd = obj.item.filter(
-            (item) => item.title.trim().length > 0
-          );
-          return { ...obj, item: newItemAdd };
-        } else return obj;
-      });
-      console.log("copylist", copyList);
-      setList(copyList);
-    } */
+  function updateView(view) {
     setCurrentView(view);
   }
   function deleteList() {

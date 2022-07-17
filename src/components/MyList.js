@@ -25,12 +25,25 @@ function customScrollFunction(event) {
 }
 
 export default function MyList() {
-  const { list, updateView, setCurrentListId } = React.useContext(ListContext);
+  const { list, updateView, setCurrentListId, currentListId, setList } =
+    React.useContext(ListContext);
   function viewList(listId) {
-    updateView(list, "viewList");
+    updateView("viewList");
     setCurrentListId(listId);
   }
-  console.log("Mylist", list);
+  React.useEffect(() => {
+    if (currentListId != null) {
+      const copyList = list.map((obj) => {
+        if (obj.id === currentListId) {
+          const newItemAdd = obj.item.filter(
+            (item) => item.title.trim().length > 0
+          );
+          return { ...obj, item: newItemAdd };
+        } else return obj;
+      });
+      setList(copyList);
+    }
+  }, []);
   return (
     <div
       id="list"

@@ -15,7 +15,6 @@ export default function ViewList(props) {
     deleteList,
   } = React.useContext(ListContext);
 
-  const [newList, setNewList] = React.useState(list);
   function changeItemStatus(itemId) {
     const copyItem = list.map((obj) => {
       if (obj.id === currentListId) {
@@ -112,7 +111,6 @@ export default function ViewList(props) {
     );
     setList(copyItem);
   }
-  console.log(list);
   return (
     <div>
       <div id="viewlist">
@@ -153,9 +151,6 @@ export default function ViewList(props) {
         </div>
       </div>
       <div id="viewListItem-container">{listDisplay}</div>
-      {/* <div id="addList">
-        <div id="sub--item">{newList}</div>
-      </div> */}
       <MyButton
         bgColor={"#b4b9ff"}
         textColor={"#000"}

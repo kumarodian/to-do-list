@@ -10,22 +10,22 @@ import ViewList from "./components/ViewList";
 import { v4 as uuidv4 } from "uuid";
 import { getCurrentDate, getRandomTheme } from "./utils";
 import "./App.css";
-let listID = null;
-function getNewList() {
-  let THEME = getRandomTheme();
-  listID = uuidv4();
-  const obj = {
-    id: listID,
-    title: "My task",
-    date: getCurrentDate(),
-    bgColor: THEME.background,
-    textColor: THEME.text,
-    item: [],
-  };
-  return obj;
-}
 
 export default function App(props) {
+  //let listID = null;
+  function getNewList() {
+    let THEME = getRandomTheme();
+    const listID = uuidv4();
+    const obj = {
+      id: listID,
+      title: "My task",
+      date: getCurrentDate(),
+      bgColor: THEME.background,
+      textColor: THEME.text,
+      item: [],
+    };
+    return obj;
+  }
   const {
     currentView,
     updateView,
@@ -37,15 +37,11 @@ export default function App(props) {
   var view;
 
   function addList() {
-    const tmp = [getNewList(), ...list];
-    console.log("before", tmp);
-    //console.log(getNewList());
-    setList((prev) => {
-      return [getNewList(), ...prev];
-    });
-    //console.log("after", list);
-    setCurrentListId(listID);
-    updateView(tmp, "viewList");
+    const newList = getNewList();
+    const tmp = [newList, ...list];
+    setList(tmp);
+    setCurrentListId(newList.id);
+    updateView("viewList");
   }
   if (currentView === "home") {
     view = (
@@ -58,23 +54,9 @@ export default function App(props) {
   } else if (currentView === "viewList") {
     view = <ViewList />;
   } else {
-    view = <AddList id={listID} />;
+    view = <AddList id={currentListId} />;
   }
-  React.useEffect(() => {
-    console.log("App effect");
-    if (currentListId != null) {
-      const copyList = list.map((obj) => {
-        if (obj.id === currentListId) {
-          const newItemAdd = obj.item.filter(
-            (item) => item.title.trim().length > 0
-          );
-          return { ...obj, item: newItemAdd };
-        } else return obj;
-      });
-      console.log("copylist", copyList);
-      setList(copyList);
-    }
-  }, [list.length]);
+
   return (
     <div className="container">
       <Header />

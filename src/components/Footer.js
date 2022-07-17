@@ -8,7 +8,7 @@ export default function Footer() {
   const { currentView, updateView, list } = React.useContext(ListContext);
   return (
     <footer>
-      <div className="footer--icon" onClick={() => updateView(list, "home")}>
+      <div className="footer--icon" onClick={() => updateView("home")}>
         <HomeRounded
           sx={{
             color: `${currentView === "home" ? "#0C064D" : defaultColor}`,
