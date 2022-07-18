@@ -5,16 +5,11 @@ import "reactjs-popup/dist/index.css";
 import { Delete, TaskAlt, Clear } from "@mui/icons-material";
 import { ListContext } from "../ListContext";
 import MyButton from "./MyButton";
+import { getRandomTheme } from "../utils";
 export default function ViewList(props) {
-  const {
-    list,
-    currentListId,
-    setList,
-    updateView,
-    setCurrentListId,
-    deleteList,
-  } = React.useContext(ListContext);
-
+  const { list, currentListId, setList, deleteList } =
+    React.useContext(ListContext);
+  const [colors, setColors] = React.useState(getRandomTheme("all"));
   function changeItemStatus(itemId) {
     const copyItem = list.map((obj) => {
       if (obj.id === currentListId) {
@@ -40,10 +35,12 @@ export default function ViewList(props) {
   let title,
     listDisplay,
     itemCompeleted = 0,
-    totalItem = 0;
+    totalItem = 0,
+    themeColor;
   list.map((obj) => {
     if (obj.id === currentListId) {
       title = obj.title;
+      themeColor = obj.bgColor;
       totalItem = obj.item.length;
       listDisplay = obj.item.map(({ id, title, status }) => {
         if (status === "done" && title.trim().length) itemCompeleted++;
@@ -111,8 +108,46 @@ export default function ViewList(props) {
     );
     setList(copyItem);
   }
+  function updateTheme(bgColor) {
+    const copyItem = list.map((obj) =>
+      obj.id === currentListId ? { ...obj, bgColor } : obj
+    );
+    setList(copyItem);
+  }
+  const allColors = colors.map((color) => {
+    return (
+      <div className="theme">
+        <div
+          onClick={() => updateTheme(color.background)}
+          className="popThemeColor"
+          style={{ background: color.background }}
+        ></div>
+      </div>
+    );
+  });
   return (
     <div>
+      <div id="menuTheme">
+        <span id="themeText">Theme :</span>
+        <Popup
+          trigger={
+            <span
+              className="themeColor"
+              style={{ background: themeColor, marginLeft: "10px" }}
+            ></span>
+          }
+          modal
+        >
+          {(close) => (
+            <div className="choose-color">
+              <div style={{ textAlign: "right" }} onClick={close}>
+                <Clear />
+              </div>
+              <div id="popColors">{allColors}</div>
+            </div>
+          )}
+        </Popup>
+      </div>
       <div id="viewlist">
         <div id="viewlist--title">
           <input
@@ -125,7 +160,7 @@ export default function ViewList(props) {
               {(close) => (
                 <div className="modal-box">
                   <p>
-                    Delete <span>{title}</span>
+                    Delete <span>{title}</span> ?
                   </p>
                   <div className="modal-box-button">
                     <button className="modal-button" onClick={close}>
@@ -135,7 +170,7 @@ export default function ViewList(props) {
                       className="modal-button modal-confirmDelete"
                       onClick={() => deleteList()}
                     >
-                      Confirm
+                      Yes, Delete
                     </button>
                   </div>
                 </div>

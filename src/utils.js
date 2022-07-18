@@ -6,7 +6,7 @@ export function getCurrentDate() {
   return `${cDay}-${cMonth}-${cYear}`;
 }
 
-export function getRandomTheme() {
+export function getRandomTheme(prams) {
   const list = [
     { background: "#3A2C85", text: "#FFFFFF" },
     { background: "#DF3435", text: "#FFFFFF" },
@@ -24,5 +24,6 @@ export function getRandomTheme() {
     { background: "#1789FC", text: "#ffffff" },
     { background: "#48E5C2", text: "#000" },
   ];
+  if (prams === "all") return list;
   return list[Math.floor(Math.random() * list.length)];
 }

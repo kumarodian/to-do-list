@@ -87,11 +87,18 @@
   font-size: 16px;
 }
 .viewlist--item {
-  padding: 7px 15px 0 0;
+  padding: 5px 0px;
+  margin: 0 0 5px 0;
   cursor: pointer;
   position: relative;
   display: flex;
   justify-content: space-between;
+}
+.viewlist--item--completed {
+  background: linear-gradient(90deg, #ffffff, #f1f1f1, white);
+}
+.viewlist--item--completed input {
+  background: transparent;
 }
 .viewlist--item svg {
   font-size: 17px;
@@ -178,4 +185,36 @@
 }
 .lineThrough {
   text-decoration: line-through;
+}
+#menuTheme {
+  display: flex;
+  align-items: center;
+}
+#themeText {
+  font-size: 12px;
+}
+.themeColor {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: red;
+  cursor: pointer;
+}
+.popThemeColor {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.theme {
+  flex: 0 0 15%;
+  align-items: center;
+  margin: 10px 6px;
+}
+#popColors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.choose-color svg {
+  cursor: pointer;
 }

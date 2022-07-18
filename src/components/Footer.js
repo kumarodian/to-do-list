@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarMonthRounded, HomeRounded } from "@mui/icons-material";
+import { HomeRounded } from "@mui/icons-material";
 import { ListContext } from "../ListContext";
 import "./Footer.css";
 
@@ -15,13 +15,13 @@ export default function Footer() {
           }}
         />
       </div>
-      <div className="footer--icon">
-        <CalendarMonthRounded
+      {/* <div className="footer--icon">
+        <FilterAltRounded
           sx={{
             color: `${currentView === "calendar" ? "#0C064D" : defaultColor}`,
           }}
         />
-      </div>
+      </div> */}
     </footer>
   );
 }

@@ -8,6 +8,7 @@ import { ListContext } from "./ListContext";
 import AddList from "./components/AddList";
 import ViewList from "./components/ViewList";
 import { v4 as uuidv4 } from "uuid";
+import { SortRounded } from "@mui/icons-material";
 import { getCurrentDate, getRandomTheme } from "./utils";
 import "./App.css";
 
@@ -48,6 +49,9 @@ export default function App(props) {
       <>
         <Heading />
         <MyButton text="Add List" click={addList} />
+        {/* <div id="filter">
+          <SortRounded />
+        </div> */}
         <MyList />
       </>
     );
